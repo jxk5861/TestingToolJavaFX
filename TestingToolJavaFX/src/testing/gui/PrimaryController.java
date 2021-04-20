@@ -20,7 +20,7 @@ public class PrimaryController {
 	@FXML
     private void initialize() {
 		Graph graph = new Graph();
-		graph = new GraphRenderer(canvas.getGraphicsContext2D());
+		graph = new GraphRenderer(canvas.getGraphicsContext2D(), canvas.getWidth(), canvas.getHeight());
 		
 		state = new VertexState(graph);
     }

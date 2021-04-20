@@ -12,17 +12,22 @@ import javafx.scene.text.TextAlignment;
 
 public class GraphRenderer extends Graph {
 	private GraphicsContext graphics;
+	private double width;
+	private double height;
 
-	public GraphRenderer(GraphicsContext graphics) {
+	public GraphRenderer(GraphicsContext graphics, double width, double height) {
 		super();
 		this.graphics = graphics;
+		this.width = width;
+		this.height = height;
 
 		graphics.setTextAlign(TextAlignment.CENTER);
 		graphics.setTextBaseline(VPos.CENTER);
 	}
 
+	@Override
 	public Vertex addVertex(Point2D point) {
-		if (this.insideVertex(point)) {
+		if (this.invalidVertexPosition(point)) {
 			return null;
 		}
 
@@ -32,8 +37,9 @@ public class GraphRenderer extends Graph {
 		return v;
 	}
 
+	@Override
 	public void addVertex(Vertex v, Point2D point) {
-		if (this.insideVertex(point)) {
+		if (this.invalidVertexPosition(point)) {
 			return;
 		}
 
@@ -41,11 +47,13 @@ public class GraphRenderer extends Graph {
 		this.drawVertex(v);
 	}
 
+	@Override
 	public void removeVertex(Vertex v) {
 		super.removeVertex(v);
 		this.redraw();
 	}
 
+	@Override
 	public void addEdge(Vertex v, Vertex w) {
 		if (v.getAdjacent().contains(w)) {
 			return;
@@ -55,45 +63,67 @@ public class GraphRenderer extends Graph {
 		this.drawEdge(v, w);
 	}
 
+	@Override
 	public void removeEdge(Vertex v, Vertex w) {
 		super.removeEdge(v, w);
 		this.redraw();
 	}
-
+	
+	@Override
 	public void moveVertex(Vertex v, Point2D loc) {
+		if(this.invalidVertexPosition(loc, v)) {
+			this.redraw();
+			// Draw the vertex in its invalid position.
+			this.drawVertex(v.getName(), loc, Color.ORANGERED);
+			return;
+		}
 		super.moveVertex(v, loc);
 		this.redraw();
+	}
+	
+	@Override
+	public boolean invalidVertexPosition(Point2D loc, Vertex... allowed) {
+		if(loc.getX() < VERTEX_RADIUS || loc.getY() < VERTEX_RADIUS) {
+			return true;
+		}
+		if(loc.getX() > this.width - VERTEX_RADIUS || loc.getY() > this.height - VERTEX_RADIUS) {
+			return true;
+		}
+		
+		return super.invalidVertexPosition(loc, allowed);
+	}
+	
+	private void drawVertex(String label, Point2D point, Color color) {
+		// Draw the vertex.
+		double x = point.getX() - VERTEX_RADIUS;
+		double y = point.getY() - VERTEX_RADIUS;
+		Paint old = graphics.getFill();
+
+		graphics.setFill(color);
+		// graphics.setFill(Color.rgb(255, 100, 100));
+		graphics.fillOval(x, y, VERTEX_DIAMETER, VERTEX_DIAMETER);
+		graphics.setFill(Color.BLACK);
+
+		graphics.strokeOval(x, y, VERTEX_DIAMETER, VERTEX_DIAMETER);
+
+		graphics.fillText(label, point.getX(), point.getY());
+		graphics.setFill(old);
 	}
 
 	/** Draw a vertex. */
 	private void drawVertex(Vertex v) {
-		Point2D point = this.map.get(v);
-
-		// Draw the vertex.
-		double x = point.getX() - nodeRadius;
-		double y = point.getY() - nodeRadius;
-		Paint old = graphics.getFill();
-
-		graphics.setFill(Color.rgb(200, 160, 255));
-		// graphics.setFill(Color.rgb(255, 100, 100));
-		graphics.fillOval(x, y, nodeDiameter, nodeDiameter);
-		graphics.setFill(Color.BLACK);
-
-		graphics.strokeOval(x, y, nodeDiameter, nodeDiameter);
-
-		graphics.fillText(v.getName(), point.getX(), point.getY());
-		graphics.setFill(old);
+		this.drawVertex(v.getName(), this.map.get(v), Color.rgb(200, 160, 255));
 	}
 
 	/** Draw an edge from v to w. */
 	private void drawEdge(Vertex v, Vertex w) {
 		if (v == w) {
 			Point2D point = this.map.get(v);
-			double x = point.getX() - nodeRadius;
-			double y = point.getY() - nodeRadius;
+			double x = point.getX() - VERTEX_RADIUS;
+			double y = point.getY() - VERTEX_RADIUS;
 
 			graphics.setLineWidth(3);
-			graphics.strokeOval(x, y, nodeDiameter, nodeDiameter);
+			graphics.strokeOval(x, y, VERTEX_DIAMETER, VERTEX_DIAMETER);
 			graphics.setLineWidth(1);
 		} else {
 			this.drawStraightEdge(v, w);
@@ -108,8 +138,8 @@ public class GraphRenderer extends Graph {
 		// Theta is the direction to get from from->to
 		double theta = Math.atan2(to.getY() - from.getY(), to.getX() - from.getX());
 		// Only draw the line outside of the circle (shrink it in the theta direction)
-		from = from.add(nodeRadius * Math.cos(theta), nodeRadius * Math.sin(theta));
-		to = to.subtract(nodeRadius * Math.cos(theta), nodeRadius * Math.sin(theta));
+		from = from.add(VERTEX_RADIUS * Math.cos(theta), VERTEX_RADIUS * Math.sin(theta));
+		to = to.subtract(VERTEX_RADIUS * Math.cos(theta), VERTEX_RADIUS * Math.sin(theta));
 
 		// Draw the line.
 		graphics.strokeLine(from.getX(), from.getY(), to.getX(), to.getY());

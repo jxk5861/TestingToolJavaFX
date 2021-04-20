@@ -1,18 +1,22 @@
 package testing.graphs;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 
 import javafx.geometry.Point2D;
 
 public class Graph {
 	protected Map<Vertex, Point2D> map;
 	protected Queue<Integer> names;
-	protected static final int nodeRadius = 20;
-	protected static final int nodeDiameter = 40;
-
+	protected static final int VERTEX_RADIUS = 20;
+	protected static final int VERTEX_DIAMETER = 40;
+	
 	public Graph() {
 		map = new HashMap<>();
 		names = new PriorityQueue<Integer>();
@@ -62,7 +66,7 @@ public class Graph {
 	public Vertex getVertex(Point2D loc) {
 		for (var e : map.entrySet()) {
 			Point2D point = e.getValue();
-			if (point.distance(loc) < nodeRadius) {
+			if (point.distance(loc) < VERTEX_RADIUS) {
 				Vertex v = e.getKey();
 				return v;
 			}
@@ -74,13 +78,24 @@ public class Graph {
 		map.put(v, loc);
 	}
 
-	public boolean insideVertex(Point2D loc) {
-		for (var e : map.entrySet()) {
+	public boolean invalidVertexPosition(Point2D loc, Vertex... allowed) {
+		Set<Vertex> allowedSet = new HashSet<>();
+		Collections.addAll(allowedSet, allowed);
+		
+		for (Entry<Vertex, Point2D> e : map.entrySet()) {
+			if(allowedSet.contains(e.getKey())) {
+				continue;
+			}
+			
 			Point2D point = e.getValue();
-			if (point.distance(loc) < nodeDiameter) {
+			if (point.distance(loc) < VERTEX_DIAMETER) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public Point2D getVertexPosition(Vertex v) {
+		return this.map.get(v);
 	}
 }

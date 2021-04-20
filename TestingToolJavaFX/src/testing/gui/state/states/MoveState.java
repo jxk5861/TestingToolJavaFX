@@ -9,6 +9,7 @@ import testing.gui.state.DrawingState;
 public class MoveState extends DrawingState {
 
 	private Vertex selected;
+	private Point2D offset;
 	
 	public MoveState(Graph graph) {
 		super(graph);
@@ -23,8 +24,7 @@ public class MoveState extends DrawingState {
 		if(selected == null) {
 			return this;
 		}
-		
-		graph.moveVertex(selected, loc);
+		offset = graph.getVertexPosition(selected).subtract(loc);
 		
 		return this;
 	}
@@ -35,16 +35,31 @@ public class MoveState extends DrawingState {
 			return this;
 		}
 		
-		Point2D loc = new Point2D(event.getX(), event.getY());
+		Point2D loc = new Point2D(event.getX(), event.getY()).add(offset);
 		
 		graph.moveVertex(selected, loc);
+		if(!graph.getVertexPosition(selected).equals(loc)) {
+			graph.moveVertex(selected, loc);
+		}
 		
 		return this;
 	}
 
 	@Override
 	public DrawingState processMouseReleasedEvent(MouseEvent event) {
+		if(selected == null) {
+			return this;
+		}
+		
+		Point2D loc = new Point2D(event.getX(), event.getY()).add(offset);
+		
+		// If the vertex ends at an invalid position, move it back to where it should be.
+		if(graph.invalidVertexPosition(loc, selected)) {
+			graph.moveVertex(selected, graph.getVertexPosition(selected));
+		}
+		
 		selected = null;
+		offset = null;
 		
 		return this;
 	}
