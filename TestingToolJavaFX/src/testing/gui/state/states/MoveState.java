@@ -16,30 +16,36 @@ public class MoveState extends DrawingState {
 	}
 
 	@Override
-	public void ProcessMousePressedEvent(MouseEvent event) {
+	public DrawingState processMousePressedEvent(MouseEvent event) {
 		Point2D loc = new Point2D(event.getX(), event.getY());
 		
 		selected = graph.getVertex(loc);
 		if(selected == null) {
-			return;
+			return this;
 		}
 		
 		graph.moveVertex(selected, loc);
+		
+		return this;
 	}
 
 	@Override
-	public void ProcessMouseMovedEvent(MouseEvent event) {
+	public DrawingState processMouseMovedEvent(MouseEvent event) {
 		if(selected == null) {
-			return;
+			return this;
 		}
 		
 		Point2D loc = new Point2D(event.getX(), event.getY());
 		
 		graph.moveVertex(selected, loc);
+		
+		return this;
 	}
 
 	@Override
-	public void ProcessMouseReleasedEvent(MouseEvent event) {
+	public DrawingState processMouseReleasedEvent(MouseEvent event) {
 		selected = null;
+		
+		return this;
 	}
 }

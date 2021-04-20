@@ -19,19 +19,19 @@ public abstract class DrawingState {
 		this.graph = graph;
 	}
 
-	public void ProcessMousePressedEvent(MouseEvent event) {
-
+	public DrawingState processMousePressedEvent(MouseEvent event) {
+		return this;
 	}
 
-	public void ProcessMouseMovedEvent(MouseEvent event) {
-
+	public DrawingState processMouseMovedEvent(MouseEvent event) {
+		return this;
 	}
 
-	public void ProcessMouseReleasedEvent(MouseEvent event) {
-
+	public DrawingState processMouseReleasedEvent(MouseEvent event) {
+		return this;
 	}
 
-	public DrawingState ProcessButtonClickedEvent(Context context) {
+	public DrawingState processButtonClickedEvent(Context context) {
 		return this.nextState(context);
 	}
 

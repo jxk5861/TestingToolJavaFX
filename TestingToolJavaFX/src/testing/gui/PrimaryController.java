@@ -2,7 +2,6 @@ package testing.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import testing.graphs.Graph;
 import testing.graphs.GraphRenderer;
@@ -28,41 +27,42 @@ public class PrimaryController {
 
 	@FXML
 	private void canvasMousePressed(MouseEvent e) {
-		state.ProcessMousePressedEvent(e);
+		// change state event though it doesnt change.
+		state = state.processMousePressedEvent(e);
 	}
 
 	@FXML
 	private void canvasMouseMoved(MouseEvent e) {
-		state.ProcessMouseMovedEvent(e);
+		state = state.processMouseMovedEvent(e);
 	}
 
 	@FXML
 	private void canvasMouseReleased(MouseEvent e) {
-		state.ProcessMouseReleasedEvent(e);
+		state = state.processMouseReleasedEvent(e);
 	}
 
 	@FXML
 	private void vertexPressed() {
-		state = state.ProcessButtonClickedEvent(Context.VERTEX);
+		state = state.processButtonClickedEvent(Context.VERTEX);
 	}
 
 	@FXML
 	private void edgePressed() {
-		state = state.ProcessButtonClickedEvent(Context.EDGE);
+		state = state.processButtonClickedEvent(Context.EDGE);
 	}
 
 	@FXML
 	private void movePressed() {
-		state = state.ProcessButtonClickedEvent(Context.MOVE);
+		state = state.processButtonClickedEvent(Context.MOVE);
 	}
 	
 	@FXML
 	private void removeVertexPressed() {
-		state = state.ProcessButtonClickedEvent(Context.REMOVE_VERTEX);
+		state = state.processButtonClickedEvent(Context.REMOVE_VERTEX);
 	}
 	
 	@FXML
 	private void removeEdgePressed() {
-		state = state.ProcessButtonClickedEvent(Context.REMOVE_EDGE);
+		state = state.processButtonClickedEvent(Context.REMOVE_EDGE);
 	}
 }

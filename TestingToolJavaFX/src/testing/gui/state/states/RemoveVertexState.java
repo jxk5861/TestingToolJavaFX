@@ -13,12 +13,14 @@ public class RemoveVertexState extends DrawingState {
 	}
 	
 	@Override
-	public void ProcessMouseReleasedEvent(MouseEvent event) {
+	public DrawingState processMouseReleasedEvent(MouseEvent event) {
 		Point2D loc = new Point2D(event.getX(), event.getY());
 		
 		Vertex remove = graph.getVertex(loc);
 		if(remove != null) {
 			graph.removeVertex(remove);
 		}
+		
+		return this;
 	}
 }

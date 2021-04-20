@@ -12,9 +12,11 @@ public class VertexState extends DrawingState {
 	}
 
 	@Override
-	public void ProcessMouseReleasedEvent(MouseEvent event) {
+	public DrawingState processMouseReleasedEvent(MouseEvent event) {
 		Point2D loc = new Point2D(event.getX(), event.getY());
 		
 		graph.addVertex(loc);
+		
+		return this;
 	}
 }

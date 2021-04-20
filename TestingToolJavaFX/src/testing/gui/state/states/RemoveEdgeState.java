@@ -16,7 +16,7 @@ public class RemoveEdgeState extends DrawingState{
 	}
 
 	@Override
-	public void ProcessMouseReleasedEvent(MouseEvent event) {
+	public DrawingState processMouseReleasedEvent(MouseEvent event) {
 		Point2D loc = new Point2D(event.getX(), event.getY());
 
 		if (start == null) {
@@ -25,12 +25,14 @@ public class RemoveEdgeState extends DrawingState{
 			Vertex end = graph.getVertex(loc);
 
 			if (end == null) {
-				return;
+				return this;
 			}
 
 			graph.removeEdge(start, end);
 			start = null;
 		}
+		
+		return this;
 	}
 	
 
