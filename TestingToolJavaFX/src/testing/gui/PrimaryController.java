@@ -18,9 +18,9 @@ public class PrimaryController {
 	}
 	
 	@FXML
-    public void initialize() {
+    private void initialize() {
 		Graph graph = new Graph();
-		graph = new GraphRenderer(graph, canvas.getGraphicsContext2D());
+		graph = new GraphRenderer(canvas.getGraphicsContext2D());
 		
 		state = new VertexState(graph);
     }
@@ -42,27 +42,27 @@ public class PrimaryController {
 	}
 
 	@FXML
-	private void vertexPressed() {
+	private void vertexButtonAction() {
 		state = state.processButtonClickedEvent(Context.VERTEX);
 	}
 
 	@FXML
-	private void edgePressed() {
+	private void edgeButtonAction() {
 		state = state.processButtonClickedEvent(Context.EDGE);
 	}
 
 	@FXML
-	private void movePressed() {
+	private void moveButtonAction() {
 		state = state.processButtonClickedEvent(Context.MOVE);
 	}
 	
 	@FXML
-	private void removeVertexPressed() {
+	private void removeVertexButtonAction() {
 		state = state.processButtonClickedEvent(Context.REMOVE_VERTEX);
 	}
 	
 	@FXML
-	private void removeEdgePressed() {
+	private void removeEdgeButtonAction() {
 		state = state.processButtonClickedEvent(Context.REMOVE_EDGE);
 	}
 }

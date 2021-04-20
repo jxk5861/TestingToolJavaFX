@@ -21,11 +21,11 @@
    <children>
       <ToolBar>
         <items>
-          <Button mnemonicParsing="false" onAction="#vertexPressed" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Vertex" />
-            <Button mnemonicParsing="false" onAction="#edgePressed" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Edge" />
-            <Button mnemonicParsing="false" onAction="#movePressed" onMouseReleased="#movePressed" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Move" />
-            <Button mnemonicParsing="false" onAction="#removeVertexPressed" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Remove Vertex" />
-            <Button mnemonicParsing="false" onAction="#removeEdgePressed" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Remove Edge" />
+          <Button mnemonicParsing="false" onAction="#vertexButtonAction" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Vertex" />
+            <Button mnemonicParsing="false" onAction="#edgeButtonAction" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Edge" />
+            <Button mnemonicParsing="false" onAction="#moveButtonAction" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Move" />
+            <Button mnemonicParsing="false" onAction="#removeVertexButtonAction" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Remove Vertex" />
+            <Button mnemonicParsing="false" onAction="#removeEdgeButtonAction" style="-fx-border-color: #c8a0ff; -fx-border-width: .5;" text="Remove Edge" />
         </items>
       </ToolBar>
       <Pane style="-fx-background-color: ffffff;" styleClass="background">

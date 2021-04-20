@@ -10,8 +10,8 @@ import javafx.geometry.Point2D;
 public class Graph {
 	protected Map<Vertex, Point2D> map;
 	protected Queue<Integer> names;
-	protected final int nodeRadius = 20;
-	protected final int nodeDiameter = 40;
+	protected static final int nodeRadius = 20;
+	protected static final int nodeDiameter = 40;
 
 	public Graph() {
 		map = new HashMap<>();

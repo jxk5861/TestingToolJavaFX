@@ -11,12 +11,10 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
 
 public class GraphRenderer extends Graph {
-	private Graph graph;
 	private GraphicsContext graphics;
 
-	public GraphRenderer(Graph graph, GraphicsContext graphics) {
+	public GraphRenderer(GraphicsContext graphics) {
 		super();
-		this.graph = graph;
 		this.graphics = graphics;
 
 		graphics.setTextAlign(TextAlignment.CENTER);
@@ -28,7 +26,7 @@ public class GraphRenderer extends Graph {
 			return null;
 		}
 
-		Vertex v = this.graph.addVertex(point);
+		Vertex v = super.addVertex(point);
 		this.drawVertex(v);
 
 		return v;
@@ -39,12 +37,12 @@ public class GraphRenderer extends Graph {
 			return;
 		}
 
-		this.graph.addVertex(v, point);
+		super.addVertex(v, point);
 		this.drawVertex(v);
 	}
 
 	public void removeVertex(Vertex v) {
-		this.graph.removeVertex(v);
+		super.removeVertex(v);
 		this.redraw();
 	}
 
@@ -53,31 +51,23 @@ public class GraphRenderer extends Graph {
 			return;
 		}
 
-		this.graph.addEdge(v, w);
+		super.addEdge(v, w);
 		this.drawEdge(v, w);
 	}
 
 	public void removeEdge(Vertex v, Vertex w) {
-		this.graph.removeEdge(v, w);
+		super.removeEdge(v, w);
 		this.redraw();
-	}
-
-	public Vertex getVertex(Point2D loc) {
-		return this.graph.getVertex(loc);
 	}
 
 	public void moveVertex(Vertex v, Point2D loc) {
-		this.graph.moveVertex(v, loc);
+		super.moveVertex(v, loc);
 		this.redraw();
-	}
-
-	public boolean insideVertex(Point2D loc) {
-		return this.graph.insideVertex(loc);
 	}
 
 	/** Draw a vertex. */
 	private void drawVertex(Vertex v) {
-		Point2D point = this.graph.map.get(v);
+		Point2D point = this.map.get(v);
 
 		// Draw the vertex.
 		double x = point.getX() - nodeRadius;
@@ -98,7 +88,7 @@ public class GraphRenderer extends Graph {
 	/** Draw an edge from v to w. */
 	private void drawEdge(Vertex v, Vertex w) {
 		if (v == w) {
-			Point2D point = this.graph.map.get(v);
+			Point2D point = this.map.get(v);
 			double x = point.getX() - nodeRadius;
 			double y = point.getY() - nodeRadius;
 
@@ -112,8 +102,8 @@ public class GraphRenderer extends Graph {
 
 	/** Draw a straight edge from v to w (v != w). */
 	private void drawStraightEdge(Vertex v, Vertex w) {
-		Point2D from = this.graph.map.get(v);
-		Point2D to = this.graph.map.get(w);
+		Point2D from = this.map.get(v);
+		Point2D to = this.map.get(w);
 
 		// Theta is the direction to get from from->to
 		double theta = Math.atan2(to.getY() - from.getY(), to.getX() - from.getX());
@@ -139,7 +129,7 @@ public class GraphRenderer extends Graph {
 	}
 
 	/** DFS to draw everything on the graph. */
-	private void drawUtil(GraphicsContext graphics, Vertex v, Set<Vertex> visited) {
+	private void drawUtil(Vertex v, Set<Vertex> visited) {
 		// Draw this vertex
 		this.drawVertex(v);
 
@@ -152,7 +142,7 @@ public class GraphRenderer extends Graph {
 
 			if (!visited.contains(w)) {
 				visited.add(w);
-				drawUtil(graphics, w, visited);
+				drawUtil(w, visited);
 			}
 		}
 	}
@@ -173,8 +163,8 @@ public class GraphRenderer extends Graph {
 		Set<Vertex> visited = new HashSet<>();
 
 		// Draw vertices.
-		for (Vertex v : this.graph.map.keySet()) {
-			drawUtil(graphics, v, visited);
+		for (Vertex v : this.map.keySet()) {
+			drawUtil(v, visited);
 		}
 	}
 

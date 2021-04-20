@@ -69,8 +69,8 @@ public class Vertex {
 		return this.adjacent;
 	}
 
-	public List<Vertex> getAdjacentCopy() {
-		return new ArrayList<>(adjacent);
+	public Set<Vertex> getAdjacentCopy() {
+		return new HashSet<>(adjacent);
 	}
 
 	public void removeEdge(Vertex edge) {
@@ -190,8 +190,8 @@ public class Vertex {
 	/**
 	 * Get all vertices which can be reached from this vertex.
 	 */
-	public LinkedList<Vertex> getConnected() {
-		LinkedList<Vertex> vertices = new LinkedList<>();
+	public Set<Vertex> getConnected() {
+		Set<Vertex> vertices = new HashSet<>();
 		HashSet<Vertex> visited = new LinkedHashSet<>();
 
 		this.getConnectedUtil(this, visited);
