@@ -3,11 +3,12 @@ package testing.gui.state.states;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import testing.graphs.Graph;
+import testing.graphs.GraphRenderer;
 import testing.gui.state.DrawingState;
 
 public class VertexState extends DrawingState {
 	
-	public VertexState(Graph graph) {
+	public VertexState(GraphRenderer graph) {
 		super(graph);
 	}
 

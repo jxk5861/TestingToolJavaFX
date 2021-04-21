@@ -71,12 +71,6 @@ public class GraphRenderer extends Graph {
 	
 	@Override
 	public void moveVertex(Vertex v, Point2D loc) {
-		if(this.invalidVertexPosition(loc, v)) {
-			this.redraw();
-			// Draw the vertex in its invalid position.
-			this.drawVertex(v.getName(), loc, Color.ORANGERED);
-			return;
-		}
 		super.moveVertex(v, loc);
 		this.redraw();
 	}
@@ -93,7 +87,7 @@ public class GraphRenderer extends Graph {
 		return super.invalidVertexPosition(loc, allowed);
 	}
 	
-	private void drawVertex(String label, Point2D point, Color color) {
+	public void drawVertex(String label, Point2D point, Color color) {
 		// Draw the vertex.
 		double x = point.getX() - VERTEX_RADIUS;
 		double y = point.getY() - VERTEX_RADIUS;
@@ -180,7 +174,7 @@ public class GraphRenderer extends Graph {
 	/**
 	 * Redraw the graph by drawing a large white square and then drawing the graph.
 	 */
-	private void redraw() {
+	public void redraw() {
 		graphics.setFill(Color.WHITE);
 		graphics.fillRect(0, 0, 1000, 1000);
 		graphics.setFill(Color.BLACK);

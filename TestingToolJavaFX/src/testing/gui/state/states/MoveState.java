@@ -2,7 +2,8 @@ package testing.gui.state.states;
 
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
-import testing.graphs.Graph;
+import javafx.scene.paint.Color;
+import testing.graphs.GraphRenderer;
 import testing.graphs.Vertex;
 import testing.gui.state.DrawingState;
 
@@ -11,7 +12,7 @@ public class MoveState extends DrawingState {
 	private Vertex selected;
 	private Point2D offset;
 	
-	public MoveState(Graph graph) {
+	public MoveState(GraphRenderer graph) {
 		super(graph);
 		selected = null;
 	}
@@ -36,12 +37,15 @@ public class MoveState extends DrawingState {
 		}
 		
 		Point2D loc = new Point2D(event.getX(), event.getY()).add(offset);
-		
-		graph.moveVertex(selected, loc);
-		if(!graph.getVertexPosition(selected).equals(loc)) {
-			graph.moveVertex(selected, loc);
+
+		if(graph.invalidVertexPosition(loc, selected)) {
+			// Draw the vertex in red at its invalid position.
+			graph.redraw();
+			graph.drawVertex(selected.getName(), loc, Color.ORANGERED);
+			return this;
 		}
 		
+		graph.moveVertex(selected, loc);
 		return this;
 	}
 
@@ -53,9 +57,10 @@ public class MoveState extends DrawingState {
 		
 		Point2D loc = new Point2D(event.getX(), event.getY()).add(offset);
 		
-		// If the vertex ends at an invalid position, move it back to where it should be.
+		// If the vertex ends at an invalid position, redraw the graph
+		// to remove the red invalid vertex.
 		if(graph.invalidVertexPosition(loc, selected)) {
-			graph.moveVertex(selected, graph.getVertexPosition(selected));
+			graph.redraw();
 		}
 		
 		selected = null;

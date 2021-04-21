@@ -2,13 +2,13 @@ package testing.gui.state.states;
 
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
-import testing.graphs.Graph;
+import testing.graphs.GraphRenderer;
 import testing.graphs.Vertex;
 import testing.gui.state.DrawingState;
 
 public class RemoveVertexState extends DrawingState {
 
-	public RemoveVertexState(Graph graph) {
+	public RemoveVertexState(GraphRenderer graph) {
 		super(graph);
 	}
 	

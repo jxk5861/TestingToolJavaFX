@@ -1,7 +1,7 @@
 package testing.gui.state;
 
 import javafx.scene.input.MouseEvent;
-import testing.graphs.Graph;
+import testing.graphs.GraphRenderer;
 import testing.gui.state.states.EdgeState;
 import testing.gui.state.states.MoveState;
 import testing.gui.state.states.RemoveEdgeState;
@@ -13,9 +13,9 @@ public abstract class DrawingState {
 		VERTEX, EDGE, MOVE, REMOVE_VERTEX, REMOVE_EDGE;
 	}
 
-	protected Graph graph;
+	protected GraphRenderer graph;
 
-	public DrawingState(Graph graph) {
+	public DrawingState(GraphRenderer graph) {
 		this.graph = graph;
 	}
 
