@@ -176,7 +176,7 @@ public class GraphRenderer extends Graph {
 	 */
 	public void redraw() {
 		graphics.setFill(Color.WHITE);
-		graphics.fillRect(0, 0, 1000, 1000);
+		graphics.fillRect(0, 0, this.width, this.height);
 		graphics.setFill(Color.BLACK);
 
 		this.draw();

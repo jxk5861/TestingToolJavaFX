@@ -18,7 +18,7 @@ public class Main extends Application {
 //			Scene scene = new Scene(root,400,400);
 //			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
-			Scene scene = new Scene(loadFXML("primary"), 900, 600);
+			Scene scene = new Scene(loadFXML("primary"), 1200, 900);
 			JMetro jMetro = new JMetro(Style.DARK);
 			jMetro.setScene(scene);
 			primaryStage.setScene(scene);

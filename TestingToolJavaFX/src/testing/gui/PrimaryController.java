@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import testing.graphs.Graph;
 import testing.graphs.GraphRenderer;
 import testing.graphs.Vertex;
@@ -27,8 +28,8 @@ public class PrimaryController {
 	@FXML
 	private void initialize() {
 		GraphRenderer graph = new GraphRenderer(canvas.getGraphicsContext2D(), canvas.getWidth(), canvas.getHeight());
-
-		state = new VertexState(graph);
+		
+		state = new VertexState(graph);		
 	}
 
 	@FXML
