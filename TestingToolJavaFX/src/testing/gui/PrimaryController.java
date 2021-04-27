@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import testing.graphs.Graph;
 import testing.graphs.GraphRenderer;
 import testing.graphs.Vertex;
@@ -86,6 +85,7 @@ public class PrimaryController {
 			Field f2 = Graph.class.getDeclaredField("map");
 			f2.setAccessible(true);
 			Object o2 = f2.get(graph);
+			@SuppressWarnings("unchecked")
 			Map<Vertex, Point2D> map = (Map<Vertex, Point2D>) o2;
 			Vertex first = null;
 			int firstId = Integer.MAX_VALUE;
