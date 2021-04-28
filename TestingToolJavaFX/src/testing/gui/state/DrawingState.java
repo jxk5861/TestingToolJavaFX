@@ -66,4 +66,8 @@ public abstract class DrawingState {
 		System.err.println(this + " returned null state!");
 		return null;
 	}
+	
+	public GraphRenderer getGraphRenderer() {
+		return this.graph;
+	}
 }

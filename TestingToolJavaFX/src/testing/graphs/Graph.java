@@ -11,7 +11,7 @@ import java.util.Set;
 
 import javafx.geometry.Point2D;
 
-public class Graph {
+public class Graph implements Cloneable{
 	protected Map<Vertex, Point2D> map;
 	protected Queue<Integer> names;
 	protected static final int VERTEX_RADIUS = 20;
@@ -20,6 +20,30 @@ public class Graph {
 	public Graph() {
 		map = new HashMap<>();
 		names = new PriorityQueue<Integer>();
+	}
+	
+	public Graph(Graph old) {
+		this();
+		Map<Vertex, Vertex> oldToNew = new HashMap<>();
+		
+		for(Vertex v : old.map.keySet()) {
+			Vertex w = new Vertex(v.getName());
+			oldToNew.put(v, w);
+		}
+		
+		for(Vertex v : old.map.keySet()) {
+			for(Vertex w : v.getAdjacent()) {
+				oldToNew.get(v).addEdge(oldToNew.get(w));
+			}
+		}
+		
+		for(Entry<Vertex, Point2D> entry : old.map.entrySet()) {
+			map.put(oldToNew.get(entry.getKey()), entry.getValue());
+		}
+		
+		for(int i : old.names) {
+			this.names.add(i);
+		}
 	}
 
 	public Vertex addVertex(Point2D point) {
@@ -97,5 +121,9 @@ public class Graph {
 	
 	public Point2D getVertexPosition(Vertex v) {
 		return this.map.get(v);
+	}
+	
+	public Graph clone() {
+		return new Graph(this);
 	}
 }

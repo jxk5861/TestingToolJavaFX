@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import testing.graphs.Vertex;
 
-public class GraphPath {
+public class GraphPath implements Cloneable{
 	protected LinkedList<Vertex> path;
 	protected HashMap<Vertex, Integer> map;
 
@@ -22,7 +22,6 @@ public class GraphPath {
 		for(Vertex v : path) {
 			this.addToMap(v);
 		}
-		
 	}
 	
 	public GraphPath(GraphPath old) {
@@ -35,7 +34,7 @@ public class GraphPath {
 		}
 	}
 	
-	private void addToMap(Vertex vertex) {
+	protected void addToMap(Vertex vertex) {
 		if(map.containsKey(vertex)) {
 			map.put(vertex, map.get(vertex) + 1);
 		}else {
@@ -86,5 +85,11 @@ public class GraphPath {
 		return builder.toString();
 	}
 	
-	
+	/**
+	 * Deep clone.
+	 * */
+	@Override
+	protected GraphPath clone() throws CloneNotSupportedException {
+		return new GraphPath(this);
+	}
 }

@@ -1,7 +1,10 @@
 package testing.graphs;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javafx.geometry.Point2D;
 import javafx.geometry.VPos;
@@ -23,6 +26,34 @@ public class GraphRenderer extends Graph {
 
 		graphics.setTextAlign(TextAlignment.CENTER);
 		graphics.setTextBaseline(VPos.CENTER);
+	}
+	
+	public GraphRenderer(GraphRenderer old) {
+		super();
+		Map<Vertex, Vertex> oldToNew = new HashMap<>();
+		
+		for(Vertex v : old.map.keySet()) {
+			Vertex w = new Vertex(v.getName());
+			oldToNew.put(v, w);
+		}
+		
+		for(Vertex v : old.map.keySet()) {
+			for(Vertex w : v.getAdjacent()) {
+				oldToNew.get(v).addEdge(oldToNew.get(w));
+			}
+		}
+		
+		for(Entry<Vertex, Point2D> entry : old.map.entrySet()) {
+			map.put(oldToNew.get(entry.getKey()), entry.getValue());
+		}
+		
+		for(int i : old.names) {
+			this.names.add(i);
+		}
+		
+		this.graphics = old.graphics;
+		this.width = old.width;
+		this.height = old.height;
 	}
 
 	@Override
@@ -190,6 +221,20 @@ public class GraphRenderer extends Graph {
 		for (Vertex v : this.map.keySet()) {
 			drawUtil(v, visited);
 		}
+	}
+	
+	public Vertex getVertexById(String id) {
+		for(Vertex v : this.map.keySet()) {
+			if(v.getName().equals(id)) {
+				return v;
+			}
+		}
+		
+		return null;
+	}
+	
+	public GraphRenderer clone() {
+		return new GraphRenderer(this);
 	}
 
 }

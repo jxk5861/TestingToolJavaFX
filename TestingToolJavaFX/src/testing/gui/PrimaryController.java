@@ -1,39 +1,57 @@
 package testing.gui;
 
-import java.lang.reflect.Field;
-import java.util.Map;
+import java.io.File;
+import java.lang.reflect.Constructor;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
-import testing.graphs.Graph;
+import javafx.stage.FileChooser;
 import testing.graphs.GraphRenderer;
-import testing.graphs.Vertex;
-import testing.graphs.paths.C1PPath;
 import testing.gui.state.DrawingState;
 import testing.gui.state.DrawingState.Context;
 import testing.gui.state.states.VertexState;
-import testing.tests.TestCoverageMetrics;
+import testing.tests.Environment;
+import testing.tests.EnvironmentIF;
+import testing.tests.TestFuture;
+import testing.tests.TestIF;
+import testing.tests.algorithms.C1;
+import testing.tests.algorithms.C1P;
+import testing.tests.loader.Utility;
 
 public class PrimaryController {
 	@FXML
+	private MenuButton testMenu;
+	@FXML
 	private Canvas canvas;
 	private DrawingState state;
-
+	
 	public PrimaryController() {
 	}
 
 	@FXML
 	private void initialize() {
 		GraphRenderer graph = new GraphRenderer(canvas.getGraphicsContext2D(), canvas.getWidth(), canvas.getHeight());
+
+		state = new VertexState(graph);
 		
-		state = new VertexState(graph);		
+		MenuItem load = new MenuItem("Load Test");
+		load.setOnAction((e) -> this.loadTest(e));
+		testMenu.getItems().add(load);
+		
+		// Add two default tests.
+		Environment environment = new Environment(state.getGraphRenderer());
+		this.addTest(new C1(environment));
+		this.addTest(new C1P(environment));
+		
 	}
 
 	@FXML
 	private void canvasMousePressed(MouseEvent e) {
-		// change state event though it doesnt change.
+		// change state event though it doesn't change.
 		state = state.processMousePressedEvent(e);
 	}
 
@@ -48,71 +66,82 @@ public class PrimaryController {
 	}
 
 	@FXML
-	private void vertexButtonAction() {
+	private void vertexButtonAction(ActionEvent event) {
 		state = state.processButtonClickedEvent(Context.VERTEX);
 	}
 
 	@FXML
-	private void edgeButtonAction() {
+	private void edgeButtonAction(ActionEvent event) {
 		state = state.processButtonClickedEvent(Context.EDGE);
 	}
 
 	@FXML
-	private void moveButtonAction() {
+	private void moveButtonAction(ActionEvent event) {
 		state = state.processButtonClickedEvent(Context.MOVE);
 	}
 
 	@FXML
-	private void removeVertexButtonAction() {
+	private void removeVertexButtonAction(ActionEvent event) {
 		state = state.processButtonClickedEvent(Context.REMOVE_VERTEX);
 	}
 
 	@FXML
-	private void removeEdgeButtonAction() {
+	private void removeEdgeButtonAction(ActionEvent event) {
 		state = state.processButtonClickedEvent(Context.REMOVE_EDGE);
 	}
-
-	//TODO: Remove
-	@FXML
-	private void runTestAction() {
-		try {
-//			System.out.println(Arrays.toString(DrawingState.class.getDeclaredFields()));
-//			if(true)return;
-			Field f = DrawingState.class.getDeclaredField("graph");
-			f.setAccessible(true);
-			Object o = f.get(state);
-			Graph graph = (Graph) o;
-			Field f2 = Graph.class.getDeclaredField("map");
-			f2.setAccessible(true);
-			Object o2 = f2.get(graph);
-			@SuppressWarnings("unchecked")
-			Map<Vertex, Point2D> map = (Map<Vertex, Point2D>) o2;
-			Vertex first = null;
-			int firstId = Integer.MAX_VALUE;
-			Vertex last = null;
-			int lastId = Integer.MIN_VALUE;
-			for (var x : map.entrySet()) {
-				String name = x.getKey().getName();
-				if (name.matches("\\d+")) {
-					int id = Integer.parseInt(name);
-					if (id < firstId) {
-						firstId = id;
-						first = x.getKey();
+	
+	private void addTest(TestIF test) {
+		String name = test.getClass().getSimpleName();
+		MenuItem item = new MenuItem(name);
+		item.setOnAction((e) -> createFuture(test));
+		
+		// Make sure the same item cannot be added twice.
+		for(MenuItem i : testMenu.getItems()) {
+			if(i.getText().equals(item.getText())) {
+				return;
+			}
+		}
+		
+		testMenu.getItems().add(Math.max(testMenu.getItems().size() - 1, 0), item);
+	}
+	
+	private void loadTest(ActionEvent event) {
+		// load in test.
+		FileChooser chooser = new FileChooser();
+		File f = chooser.showOpenDialog(canvas.getScene().getWindow());
+		// C:\Users\jjkar\git\TestingToolJavaFX\TestingToolJavaFX\target\classes\testing\tests\algorithms
+//		File f = new File("C:\\Users\\jjkar\\git\\TestingToolJavaFX\\TestingToolJavaFX\\target\\classes\\testing\\tests\\algorithms\\C1.class");
+		if(f == null) {
+			return;
+		}
+		
+		//C:\Users\jjkar\git\TestingToolJavaFX\TestingToolJavaFX\target\classes\testing\tests\algorithms
+		Class<?> clazz = Utility.tryLoadClassFromFile(f);
+		if(clazz == null) {
+			return;
+		}
+		
+		for(Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+			if(constructor.getParameterTypes().length == 1) {
+				if(EnvironmentIF.class == constructor.getParameterTypes()[0]) {
+					Environment environment = new Environment(state.getGraphRenderer());
+					try {
+						Object o = constructor.newInstance(environment);
+						if(o instanceof TestIF test) {
+							this.addTest(test);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-					if (id > lastId) {
-						lastId = id;
-						last = x.getKey();
-					}
+					return;
 				}
 			}
-			var x = TestCoverageMetrics.c1p(first, last);
-			System.out.println("\n\n\n\n");
-			System.out.println(x.size());
-			x.forEach(C1PPath::print);
-			System.out.println(x.size());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+	}
+	
+	private void createFuture(TestIF test) {
+		test.initialize();
+		// create future.
+		new TestFuture(test);
 	}
 }
