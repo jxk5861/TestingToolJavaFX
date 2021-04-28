@@ -44,9 +44,20 @@ public class C1P extends Test {
 			filter = new InvalidPathFilter(source);
 		}
 		
+		
+		long valid = paths.stream().filter(C1PPath::succeeds).count();
+		long invalid = paths.stream().filter(C1PPath::fails).count();
+		
 		System.out.println("C1P Testing Results:");
-		System.out.println(filter.getData() + " Paths");
+		System.out.println(filter.getData().size() + " Total Paths (" + valid + " valid, " + invalid + " invalid)");
 		filter.getData().forEach(C1PPath::print);
+		
+		// Sleep for a small amount so that the out/err print in the right order.
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println();
 		
 		return result;

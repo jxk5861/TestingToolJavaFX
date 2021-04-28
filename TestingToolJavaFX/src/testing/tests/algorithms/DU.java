@@ -40,6 +40,9 @@ public class DU extends Test {
 
 	@Override
 	public void initialize() {
+		declares.clear();
+		uses.clear();
+		
 		GraphRenderer clone = environment.getGraphRenderer().clone();
 		String id = JOptionPane.showInputDialog("Input the declare verticies seperated by a comma (,)");
 		for(String s : id.split(",")) {
