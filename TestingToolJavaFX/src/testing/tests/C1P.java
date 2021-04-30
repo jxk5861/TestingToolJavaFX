@@ -1,4 +1,4 @@
-package testing.algorithms;
+package testing.tests;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +16,7 @@ import graphs.filter.source.SourceIF;
 import graphs.paths.C1PPath;
 import graphs.paths.GraphPath;
 import testing.Test;
-import testing.TestCoverageMetrics;
+import testing.algorithms.TestCoverageMetrics;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.future.TestResult;
 

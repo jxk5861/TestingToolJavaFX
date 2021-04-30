@@ -1,4 +1,4 @@
-package testing;
+package testing.algorithms;
 
 import java.util.ArrayList;
 import java.util.HashSet;

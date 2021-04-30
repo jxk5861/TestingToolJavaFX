@@ -1,4 +1,4 @@
-package testing.algorithms;
+package testing.tests;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
 import testing.Test;
-import testing.TestCoverageMetrics;
+import testing.algorithms.TestCoverageMetrics;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.future.TestResult;
 

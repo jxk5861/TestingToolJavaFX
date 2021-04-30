@@ -15,12 +15,12 @@ import gui.state.DrawingState;
 import gui.state.DrawingState.Context;
 import gui.state.states.VertexState;
 import testing.TestIF;
-import testing.algorithms.C1;
-import testing.algorithms.C1P;
 import testing.dynamiclinkage.Environment;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.future.TestFuture;
 import testing.loader.Utility;
+import testing.tests.C1;
+import testing.tests.C1P;
 
 public class PrimaryController {
 	@FXML
