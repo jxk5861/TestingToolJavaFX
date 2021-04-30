@@ -5,5 +5,5 @@ module TestingToolJavaFX {
 	requires javafx.graphics;
 	requires java.desktop;
 	
-	opens testing.gui to javafx.graphics, javafx.fxml;
+	opens gui to javafx.graphics, javafx.fxml;
 }
