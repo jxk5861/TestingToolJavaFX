@@ -1,4 +1,4 @@
-package tests.loader;
+package testing.loader;
 
 import java.io.File;
 import java.net.URL;

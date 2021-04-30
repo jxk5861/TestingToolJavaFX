@@ -1,4 +1,4 @@
-package tests.algorithms;
+package testing.algorithms;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +15,10 @@ import graphs.filter.source.Source;
 import graphs.filter.source.SourceIF;
 import graphs.paths.C1PPath;
 import graphs.paths.GraphPath;
-import tests.Test;
-import tests.TestCoverageMetrics;
-import tests.dynamiclinkage.EnvironmentIF;
-import tests.future.TestResult;
+import testing.Test;
+import testing.TestCoverageMetrics;
+import testing.dynamiclinkage.EnvironmentIF;
+import testing.future.TestResult;
 
 public class C1P extends Test {
 	private Vertex start;

@@ -1,4 +1,4 @@
-package tests.algorithms;
+package testing.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import javax.swing.JOptionPane;
 import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
-import tests.DataFlowTesting;
-import tests.Test;
-import tests.dynamiclinkage.EnvironmentIF;
-import tests.future.TestResult;
+import testing.DataFlowTesting;
+import testing.Test;
+import testing.dynamiclinkage.EnvironmentIF;
+import testing.future.TestResult;
 
 public class DU extends Test {
 

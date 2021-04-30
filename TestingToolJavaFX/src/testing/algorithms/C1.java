@@ -1,4 +1,4 @@
-package tests.algorithms;
+package testing.algorithms;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import javax.swing.JOptionPane;
 import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
-import tests.Test;
-import tests.TestCoverageMetrics;
-import tests.dynamiclinkage.EnvironmentIF;
-import tests.future.TestResult;
+import testing.Test;
+import testing.TestCoverageMetrics;
+import testing.dynamiclinkage.EnvironmentIF;
+import testing.future.TestResult;
 
 public class C1 extends Test{
 

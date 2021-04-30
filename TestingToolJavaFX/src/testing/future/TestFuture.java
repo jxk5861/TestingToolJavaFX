@@ -1,6 +1,6 @@
-package tests.future;
+package testing.future;
 
-import tests.TestIF;
+import testing.TestIF;
 
 public class TestFuture {
     TestResult result;

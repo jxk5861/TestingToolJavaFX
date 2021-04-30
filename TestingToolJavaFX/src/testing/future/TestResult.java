@@ -1,4 +1,4 @@
-package tests.future;
+package testing.future;
 
 import java.util.List;
 

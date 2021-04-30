@@ -1,4 +1,4 @@
-package tests.dynamiclinkage;
+package testing.dynamiclinkage;
 
 import graphs.GraphRenderer;
 

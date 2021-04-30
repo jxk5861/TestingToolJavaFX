@@ -14,13 +14,13 @@ import graphs.GraphRenderer;
 import gui.state.DrawingState;
 import gui.state.DrawingState.Context;
 import gui.state.states.VertexState;
-import tests.TestIF;
-import tests.algorithms.C1;
-import tests.algorithms.C1P;
-import tests.dynamiclinkage.Environment;
-import tests.dynamiclinkage.EnvironmentIF;
-import tests.future.TestFuture;
-import tests.loader.Utility;
+import testing.TestIF;
+import testing.algorithms.C1;
+import testing.algorithms.C1P;
+import testing.dynamiclinkage.Environment;
+import testing.dynamiclinkage.EnvironmentIF;
+import testing.future.TestFuture;
+import testing.loader.Utility;
 
 public class PrimaryController {
 	@FXML

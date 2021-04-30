@@ -1,6 +1,6 @@
-package tests;
+package testing;
 
-import tests.dynamiclinkage.EnvironmentIF;
+import testing.dynamiclinkage.EnvironmentIF;
 
 public abstract class Test implements TestIF {
     protected EnvironmentIF environment;

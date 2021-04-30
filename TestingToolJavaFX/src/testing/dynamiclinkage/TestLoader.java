@@ -1,6 +1,6 @@
-package tests.dynamiclinkage;
+package testing.dynamiclinkage;
 
-import tests.Test;
+import testing.Test;
 
 public abstract class TestLoader extends Test {
 
