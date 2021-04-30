@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
 import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
-import testing.Test;
 import testing.algorithms.DataFlowTesting;
 import testing.dynamiclinkage.EnvironmentIF;
+import testing.dynamiclinkage.TestLoader;
 import testing.future.TestResult;
 
-public class DU extends Test {
+public class DU extends TestLoader {
 
 	private List<Vertex> declares;
 	private List<Vertex> uses;

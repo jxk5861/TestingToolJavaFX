@@ -1,4 +1,4 @@
-package testing.loader;
+package testing.dynamiclinkage;
 
 import java.io.File;
 import java.net.URL;
