@@ -18,8 +18,9 @@ public class Main extends Application {
 //			BorderPane root = new BorderPane();
 //			Scene scene = new Scene(root,400,400);
 //			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			Scene scene = new Scene(loadFXML("primary"), 1200, 900);
-			
+			Parent parent = loadFXML("primary");
+			Scene scene = new Scene(parent, 1200, 900);
+
 			JMetro jMetro = new JMetro(Style.DARK);
 			jMetro.setScene(scene);
 			Image image = new Image("Icon.png");
@@ -28,7 +29,7 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Testing Tool");
 			primaryStage.show();
-			
+
 //			primaryStage.setScene(scene);
 //			primaryStage.show();
 		} catch (Exception e) {

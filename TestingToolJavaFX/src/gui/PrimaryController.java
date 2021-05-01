@@ -140,7 +140,7 @@ public class PrimaryController {
 	}
 
 	private void createFuture(TestIF test) {
-		test.initialize();
+		test.init();
 		// create future.
 		new TestFuture(test);
 	}

@@ -64,7 +64,7 @@ public class C1P extends Test {
 	}
 
 	@Override
-	public void initialize() {
+	public void init() {
 		// initialize start and end
 		GraphRenderer clone = environment.getGraphRenderer().clone();
 		

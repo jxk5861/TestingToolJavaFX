@@ -39,7 +39,7 @@ public class DU extends TestLoader {
 	}
 
 	@Override
-	public void initialize() {
+	public void init() {
 		declares.clear();
 		uses.clear();
 		
