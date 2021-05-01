@@ -46,7 +46,7 @@ public class PrimaryController {
 		futures = new HashMap<>();
 		results = new HashMap<>();
 		this.checkIcon = new Image("check.png");
-		this.xIcon =  new Image("x.png");
+		this.xIcon = new Image("x.png");
 	}
 
 	@FXML
@@ -64,7 +64,7 @@ public class PrimaryController {
 		this.addTest(new C1(environment));
 		this.addTest(new C1P(environment));
 
-		Timeline futureChecker = new Timeline(new KeyFrame(Duration.millis(1000/20), e -> futureChecker(e)));
+		Timeline futureChecker = new Timeline(new KeyFrame(Duration.millis(1000 / 20), e -> futureChecker(e)));
 		futureChecker.setCycleCount(Timeline.INDEFINITE);
 		futureChecker.play();
 	}
@@ -161,22 +161,26 @@ public class PrimaryController {
 	}
 
 	private void createFuture(TestIF test, MenuItem item) {
-		if(futures.containsKey(item)) {
+		if (futures.containsKey(item)) {
 			// The future is not complete, so continue.
+			// cancel the test... (no need to synchronize since the checker is on the same thread)
+			futures.get(item).cancel();
+			futures.remove(item);
+			item.setGraphic(null);
 			return;
 		}
-		
-		if(results.containsKey(item)) {
+
+		if (results.containsKey(item)) {
 			// Show the results
 			TestResult result = results.get(item);
 			result.display();
-			
+
 			// Remove the results from the results list and allow the test to be run again.
 			results.remove(item);
 			item.setGraphic(null);
 			return;
 		}
-		
+
 		item.setGraphic(new ImageView(xIcon));
 		test.init();
 		// create future.
@@ -184,20 +188,19 @@ public class PrimaryController {
 		futures.put(item, future);
 	}
 
-	
 	/**
 	 * The controller checks the future list for futures which may have completed.
 	 * If they have completed, the icon updates to a check mark instead of a red x.
 	 * 
 	 * Clicking on the item will display the results.
-	 * */
+	 */
 	private void futureChecker(ActionEvent event) {
-		for(var i = futures.entrySet().iterator(); i.hasNext();) {
+		for (var i = futures.entrySet().iterator(); i.hasNext();) {
 			var e = i.next();
 			MenuItem item = e.getKey();
 			TestFuture future = e.getValue();
-			
-			if(future.check()) {
+
+			if (future.check()) {
 				// remove from the checker map.
 				i.remove();
 				// put onto the results map.
