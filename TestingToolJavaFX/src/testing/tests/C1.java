@@ -1,6 +1,5 @@
 package testing.tests;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -8,9 +7,6 @@ import javax.swing.JOptionPane;
 import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import testing.Test;
 import testing.algorithms.TestCoverageMetrics;
 import testing.dynamiclinkage.EnvironmentIF;
