@@ -1,6 +1,8 @@
 package testing.future;
 
 import testing.TestIF;
+import testing.results.NullResult;
+import testing.results.TestResult;
 
 public class TestFuture {
     TestResult result;
@@ -17,7 +19,11 @@ public class TestFuture {
         return TAF.check();      
     }
     public TestResult waitForResult() throws InterruptedException{
-        return TAF.getResult();
+    	TestResult result = TAF.getResult();
+    	if(result == null) {
+    		result = new NullResult();
+    	}
+        return result;
     }
     private class Runner extends Thread {
           public void run() {

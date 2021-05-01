@@ -1,6 +1,6 @@
 package testing;
 
-import testing.future.TestResult;
+import testing.results.TestResult;
 
 public interface TestIF {
     TestResult run();

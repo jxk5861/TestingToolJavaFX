@@ -1,6 +1,7 @@
 package testing.future;
 
 import testing.TestIF;
+import testing.results.TestResult;
 
 public class TestAsynchronousFuture {
     TestResult result;

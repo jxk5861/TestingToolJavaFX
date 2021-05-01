@@ -11,7 +11,8 @@ import graphs.paths.GraphPath;
 import testing.algorithms.DataFlowTesting;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.dynamiclinkage.TestLoader;
-import testing.future.TestResult;
+import testing.results.DUTestResult;
+import testing.results.TestResult;
 
 public class DU extends TestLoader {
 
@@ -28,12 +29,7 @@ public class DU extends TestLoader {
 	@Override
 	public TestResult run() {
 		List<GraphPath> duPaths = DataFlowTesting.duPaths(declares, uses);
-		TestResult result = new TestResult(duPaths);
-		
-		System.out.println("DU Paths Testing Results");
-		System.out.println(duPaths.size() + " Paths");
-		duPaths.forEach(System.out::println);
-		System.out.println();
+		TestResult result = new DUTestResult(duPaths);
 		
 		return result;
 	}

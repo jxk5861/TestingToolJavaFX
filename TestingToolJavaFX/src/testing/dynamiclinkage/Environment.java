@@ -11,6 +11,7 @@ public class Environment implements EnvironmentIF {
 
 	@Override
 	public GraphRenderer getGraphRenderer() {
-		return graphRenderer;
+		return this.graphRenderer;
 	}
+
 }
