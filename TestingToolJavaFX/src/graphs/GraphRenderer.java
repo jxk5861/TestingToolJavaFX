@@ -136,7 +136,7 @@ public class GraphRenderer extends Graph {
 	}
 
 	/** Draw a vertex. */
-	private void drawVertex(Vertex v) {
+	public void drawVertex(Vertex v) {
 		this.drawVertex(v.getName(), this.map.get(v), Color.rgb(200, 160, 255));
 	}
 
