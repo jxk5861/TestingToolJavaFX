@@ -3,6 +3,7 @@ package testing.results;
 import java.util.List;
 
 import graphs.paths.GraphPath;
+import testing.TestResult;
 
 public class DUTestResult extends TestResult{
 

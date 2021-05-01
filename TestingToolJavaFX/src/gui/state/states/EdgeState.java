@@ -7,6 +7,9 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import gui.state.DrawingState;
 
+/**
+ * The state corresponding to when clicking on the canvas creates edges.
+ */
 public class EdgeState extends DrawingState {
 
 	private Vertex start;

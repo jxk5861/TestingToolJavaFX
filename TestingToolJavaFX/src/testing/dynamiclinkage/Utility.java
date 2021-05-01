@@ -5,37 +5,33 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class Utility {
+	/**
+	 * Try to load a class from its file path. This method assumes that the class is
+	 * located in a directory corresponding to its class-path.
+	 */
+	// TODO: Try to read the class path from the .class file (also unreliable)
 	public static Class<?> tryLoadClassFromFile(File file) {
-        String name = file.getName();
-        name = name.substring(0, name.lastIndexOf('.'));
+		String name = file.getName();
+		name = name.substring(0, name.lastIndexOf('.'));
+		StringBuilder classFullyQualifiedName = new StringBuilder(name);
 
-//        System.out.println("Name: " + name);
+		while (file.getParentFile() != null) {
+			file = file.getParentFile();
+			if (!file.getName().equals("")) {
+				try {
+					URL url = file.toURI().toURL();
+					URL[] urls = { url };
+					ClassLoader loader = URLClassLoader.newInstance(urls);
 
-        StringBuilder classFullyQualifiedName = new StringBuilder(name);
+					return Class.forName(classFullyQualifiedName.toString(), true, loader);
+				} catch (Exception | Error e) {
 
-        while(file.getParentFile() != null) {
-            file = file.getParentFile();
-            if(!file.getName().equals("")) {
-//                System.out.println("Trying to load file: " + file.getAbsolutePath() + " " + classFullyQualifiedName.toString());
+				}
 
-                try {
-                    URL url = file.toURI().toURL();
-//                    System.out.println("URL for " + classFullyQualifiedName + ": " + url);
-                    URL[] urls = {url};
-//                    System.out.println(classFullyQualifiedName);
-                    ClassLoader loader = URLClassLoader.newInstance(urls);
-
-                    return Class.forName(classFullyQualifiedName.toString(), true, loader);
-                }catch(Exception e) {
-//					e.printStackTrace();
-                }catch(Error e){
-
-                }
-
-                classFullyQualifiedName.insert(0, '.');
-                classFullyQualifiedName.insert(0, file.getName());
-            }
-        }
-        return null;
-    }
+				classFullyQualifiedName.insert(0, '.');
+				classFullyQualifiedName.insert(0, file.getName());
+			}
+		}
+		return null;
+	}
 }

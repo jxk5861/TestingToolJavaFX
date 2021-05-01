@@ -12,9 +12,9 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
 import testing.Test;
+import testing.TestResult;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.results.C1TestResult;
-import testing.results.TestResult;
 
 public class C1 extends Test {
 

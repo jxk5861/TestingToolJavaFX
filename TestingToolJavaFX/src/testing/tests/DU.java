@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
+import testing.TestResult;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.dynamiclinkage.TestLoader;
 import testing.results.DUTestResult;
-import testing.results.TestResult;
 
 public class DU extends TestLoader {
 

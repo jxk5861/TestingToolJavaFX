@@ -36,12 +36,16 @@ public abstract class DrawingState {
 	}
 
 	/**
-	 * Sometimes a state may need to perform some cleanup before it exits. (such as edge state re-coloring a start vertex)
-	 * */
+	 * Sometimes a state may need to perform some cleanup before it exits. (such as
+	 * edge state re-coloring a start vertex)
+	 */
 	protected void exitState() {
-		
+
 	}
-	
+
+	/**
+	 * Transition to the next state based on the event context.
+	 */
 	protected DrawingState nextState(Context context) {
 		if (context == Context.VERTEX) {
 			if (this instanceof VertexState) {
@@ -78,7 +82,7 @@ public abstract class DrawingState {
 		System.err.println(this + " returned null state!");
 		return null;
 	}
-	
+
 	public GraphRenderer getGraphRenderer() {
 		return this.graph;
 	}

@@ -7,6 +7,9 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import gui.state.DrawingState;
 
+/**
+ * The state corresponding to when clicking on the canvas moves vertices.
+ */
 public class MoveState extends DrawingState {
 
 	private Vertex selected;

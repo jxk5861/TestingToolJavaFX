@@ -11,9 +11,9 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.C1PPath;
 import testing.Test;
+import testing.TestResult;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.results.C1PTestResult;
-import testing.results.TestResult;
 
 public class C1P extends Test {
 	private Vertex start;

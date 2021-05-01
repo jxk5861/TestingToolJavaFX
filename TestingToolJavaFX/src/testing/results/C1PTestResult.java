@@ -12,6 +12,7 @@ import graphs.filter.filters.ValidPathFilter;
 import graphs.filter.source.Source;
 import graphs.filter.source.SourceIF;
 import graphs.paths.C1PPath;
+import testing.TestResult;
 
 public class C1PTestResult extends TestResult{
 	

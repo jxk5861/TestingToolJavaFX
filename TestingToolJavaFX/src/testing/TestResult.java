@@ -1,4 +1,4 @@
-package testing.results;
+package testing;
 
 import java.util.List;
 
@@ -10,6 +10,10 @@ public abstract class TestResult {
 	public TestResult(List<GraphPath> paths) {
 		this.paths = paths;
 	}
-	
+
+	/**
+	 * Display a test result. This may be done in any way the programmer wants. Like
+	 * printing to console or displaying a javafx scene.
+	 */
 	public abstract void display();
 }

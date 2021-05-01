@@ -22,11 +22,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import testing.TestIF;
+import testing.TestResult;
 import testing.dynamiclinkage.Environment;
 import testing.dynamiclinkage.EnvironmentIF;
 import testing.dynamiclinkage.Utility;
 import testing.future.TestFuture;
-import testing.results.TestResult;
 import testing.tests.C1;
 import testing.tests.C1P;
 
@@ -45,6 +45,7 @@ public class PrimaryController {
 	public PrimaryController() {
 		futures = new HashMap<>();
 		results = new HashMap<>();
+		
 		this.checkIcon = new Image("check.png");
 		this.xIcon = new Image("x.png");
 	}
@@ -55,6 +56,7 @@ public class PrimaryController {
 
 		state = new VertexState(graph);
 
+		// Add the "load test" menu item.
 		MenuItem load = new MenuItem("Load Test");
 		load.setOnAction((e) -> this.loadTest(e));
 		testMenu.getItems().add(load);
@@ -64,6 +66,7 @@ public class PrimaryController {
 		this.addTest(new C1(environment));
 		this.addTest(new C1P(environment));
 
+		// Start the future checker thread.
 		Timeline futureChecker = new Timeline(new KeyFrame(Duration.millis(1000 / 20), e -> futureChecker(e)));
 		futureChecker.setCycleCount(Timeline.INDEFINITE);
 		futureChecker.play();
@@ -71,7 +74,6 @@ public class PrimaryController {
 
 	@FXML
 	private void canvasMousePressed(MouseEvent e) {
-		// change state event though it doesn't change.
 		state = state.processMousePressedEvent(e);
 	}
 
@@ -110,10 +112,15 @@ public class PrimaryController {
 		state = state.processButtonClickedEvent(Context.REMOVE_EDGE);
 	}
 
+	/**
+	 * Add a unique test (by class name) to the list of menu items and register its
+	 * action event.
+	 */
 	private void addTest(TestIF test) {
+		// Just use the simple class name as the menu item.
 		String name = test.getClass().getSimpleName();
 		MenuItem item = new MenuItem(name);
-		item.setOnAction(e -> createFuture(test, item));
+		item.setOnAction(e -> testItemClicked(item, test));
 
 		// Make sure the same item cannot be added twice.
 		for (MenuItem i : testMenu.getItems()) {
@@ -122,9 +129,15 @@ public class PrimaryController {
 			}
 		}
 
+		// Add to end of list but in front of the "load test" item.
 		testMenu.getItems().add(Math.max(testMenu.getItems().size() - 1, 0), item);
 	}
 
+	/**
+	 * Load in a test from the specified file location. The program environment is
+	 * created here and passed into the the test. The PrimaryController class is not
+	 * passed in because giving programs that much access is not ideal.
+	 */
 	private void loadTest(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
 		File f = chooser.showOpenDialog(canvas.getScene().getWindow());
@@ -160,10 +173,18 @@ public class PrimaryController {
 		}
 	}
 
-	private void createFuture(TestIF test, MenuItem item) {
+	/**
+	 * Called when a test is clicked.
+	 * 
+	 * If the test icon is null (blank) the test is initialized and ran. If the test
+	 * is running (the red x is visible) the test is canceled. If the test is
+	 * complete (the green check mark is visible) the test results are displayed.
+	 */
+	private void testItemClicked(MenuItem item, TestIF test) {
+		// If the test is running cancel it.
 		if (futures.containsKey(item)) {
-			// The future is not complete, so continue.
-			// cancel the test... (no need to synchronize since the checker is on the same thread)
+			// cancel the test (no need to synchronize since the checker is on the same
+			// thread)
 			futures.get(item).cancel();
 			futures.remove(item);
 			item.setGraphic(null);
@@ -181,10 +202,16 @@ public class PrimaryController {
 			return;
 		}
 
+		// Set the menu item's graphic to the red x (running).
 		item.setGraphic(new ImageView(xIcon));
+
+		// Initialize the test with its testing information. Ex. start node
 		test.init();
-		// create future.
+
+		// Create future.
 		TestFuture future = new TestFuture(test);
+
+		// Add the future to the running tests list.
 		futures.put(item, future);
 	}
 

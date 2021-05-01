@@ -1,8 +1,8 @@
 package testing.future;
 
 import testing.TestIF;
+import testing.TestResult;
 import testing.results.NullResult;
-import testing.results.TestResult;
 
 public class TestFuture {
 	TestResult result;
@@ -16,14 +16,23 @@ public class TestFuture {
 		new Runner().start();
 	}
 
+	/**
+	 * Check if the test has completed.
+	 */
 	public boolean check() {
 		return TAF.check();
 	}
 
+	/**
+	 * Mark the test as canceled.
+	 */
 	public void cancel() {
 		TAF.cancel();
 	}
 
+	/**
+	 * Wait for the test to complete then get its result.
+	 */
 	public TestResult waitForResult() throws InterruptedException {
 		TestResult result = TAF.getResult();
 		if (result == null) {
@@ -35,7 +44,7 @@ public class TestFuture {
 	private class Runner extends Thread {
 		public void run() {
 			try {
-				TAF.Test();
+				TAF.test();
 			} catch (Exception e) {
 
 			}

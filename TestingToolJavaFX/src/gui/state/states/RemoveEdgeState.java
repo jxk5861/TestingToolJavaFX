@@ -7,6 +7,9 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import gui.state.DrawingState;
 
+/**
+ * The state corresponding to when clicking on the canvas removes edges.
+ */
 public class RemoveEdgeState extends DrawingState {
 
 	private Vertex start;

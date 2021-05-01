@@ -1,7 +1,7 @@
 package testing.future;
 
 import testing.TestIF;
-import testing.results.TestResult;
+import testing.TestResult;
 
 public class TestAsynchronousFuture {
 	TestResult result;
@@ -12,14 +12,23 @@ public class TestAsynchronousFuture {
 		this.t = t;
 	}
 
+	/**
+	 * Check if the test has completed.
+	 */
 	public boolean check() {
 		return done;
 	}
 
+	/**
+	 * Mark the test as canceled.
+	 */
 	public void cancel() {
 		t.setCanceled(true);
 	}
 
+	/**
+	 * Wait for the test to complete then get its result.
+	 */
 	public synchronized TestResult getResult() throws InterruptedException {
 		while (!done) {
 			wait();
@@ -27,7 +36,7 @@ public class TestAsynchronousFuture {
 		return result;
 	}
 
-	public synchronized void Test() {
+	public synchronized void test() {
 		result = t.run();
 		done = true;
 	}
