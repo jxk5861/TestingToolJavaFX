@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,8 +23,6 @@ import javafx.util.Duration;
 import testing.TestIF;
 import testing.TestResult;
 import testing.dynamiclinkage.TestingEnvironment;
-import testing.dynamiclinkage.TestingEnvironmentIF;
-import testing.dynamiclinkage.Utility;
 import testing.future.TestFuture;
 import testing.tests.C1;
 import testing.tests.C1P;
@@ -37,6 +34,7 @@ public class PrimaryController {
 	private Canvas canvas;
 	private DrawingState state;
 
+	private TestingEnvironment environment;
 	private Map<MenuItem, TestFuture> futures;
 	private Map<MenuItem, TestResult> results;
 	private Image checkIcon;
@@ -54,7 +52,11 @@ public class PrimaryController {
 	private void initialize() {
 		GraphRenderer graph = new GraphRenderer(canvas.getGraphicsContext2D(), canvas.getWidth(), canvas.getHeight());
 
+		// Set initial state to vertex state.
 		state = new VertexState(graph);
+		
+		// Create the program environment from the graph renderer.
+		environment = new TestingEnvironment(state.getGraphRenderer());
 
 		// Add the "load test" menu item.
 		MenuItem load = new MenuItem("Load Test");
@@ -62,7 +64,6 @@ public class PrimaryController {
 		testMenu.getItems().add(load);
 
 		// Add two default tests.
-		TestingEnvironment environment = new TestingEnvironment(state.getGraphRenderer());
 		this.addTest(new C1(environment));
 		this.addTest(new C1P(environment));
 
@@ -147,30 +148,11 @@ public class PrimaryController {
 		}
 
 		// C:\Users\jjkar\git\TestingToolJavaFX\TestingToolJavaFX\target\classes\testing\tests\algorithms
-		Class<?> clazz = Utility.tryLoadClassFromFile(f);
-		if (clazz == null) {
+		TestIF test = environment.loadTest(f);
+		if(test == null) {
 			return;
 		}
-
-		// Find the correct constructor (the one with environment as a parameter)
-		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-			if (constructor.getParameterTypes().length == 1) {
-				if (TestingEnvironmentIF.class == constructor.getParameterTypes()[0]) {
-					// Create the program environment from the graph renderer.
-					TestingEnvironment environment = new TestingEnvironment(state.getGraphRenderer());
-					try {
-						Object o = constructor.newInstance(environment);
-						if (o instanceof TestIF) {
-							TestIF test = (TestIF) o;
-							this.addTest(test);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					return;
-				}
-			}
-		}
+		this.addTest(test);
 	}
 
 	/**

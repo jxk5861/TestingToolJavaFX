@@ -60,7 +60,7 @@ public class DU extends TestLoader {
 		}
 	}
 	
-	public List<GraphPath> duPaths(List<Vertex> declares, List<Vertex> uses){
+	private List<GraphPath> duPaths(List<Vertex> declares, List<Vertex> uses){
 		List<GraphPath> duPaths = new ArrayList<>();
 		
 		for(Vertex declare : declares) {

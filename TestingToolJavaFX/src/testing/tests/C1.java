@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -90,7 +91,7 @@ public class C1 extends Test {
 		return paths;
 	}
 
-	private void c1Helper(GraphPath path, HashSet<Edge> visited, List<GraphPath> paths) {
+	private void c1Helper(GraphPath path, Set<Edge> visited, List<GraphPath> paths) {
 		if (this.isCanceled()) {
 			return;
 		}

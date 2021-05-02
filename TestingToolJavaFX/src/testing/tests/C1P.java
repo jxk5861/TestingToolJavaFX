@@ -48,7 +48,7 @@ public class C1P extends Test {
 	}
 
 	// Conduct c1p testing from in to out.
-	public List<C1PPath> c1p(Vertex in, Vertex out) {
+	private List<C1PPath> c1p(Vertex in, Vertex out) {
 		LinkedList<Vertex> queue = new LinkedList<>();
 		queue.add(in);
 
