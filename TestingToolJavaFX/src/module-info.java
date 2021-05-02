@@ -6,6 +6,5 @@ module TestingToolJavaFX {
 	requires java.desktop;
 	
 	opens gui to javafx.graphics, javafx.fxml;
-	opens testing.results.c1p to javafx.fxml;
 	opens testing.results to javafx.fxml;
 }

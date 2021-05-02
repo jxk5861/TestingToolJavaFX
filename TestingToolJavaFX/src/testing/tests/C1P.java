@@ -13,7 +13,7 @@ import graphs.paths.C1PPath;
 import testing.Test;
 import testing.TestResult;
 import testing.dynamiclinkage.TestingEnvironmentIF;
-import testing.results.c1p.C1PTestResult;
+import testing.results.C1PTestResult;
 
 public class C1P extends Test {
 	private Vertex start;

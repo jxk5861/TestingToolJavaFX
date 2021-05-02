@@ -1,4 +1,4 @@
-package testing.results.c1p;
+package testing.results;
 
 import java.util.List;
 
