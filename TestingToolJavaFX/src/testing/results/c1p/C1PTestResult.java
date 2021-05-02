@@ -1,9 +1,10 @@
-package testing.results;
+package testing.results.c1p;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
-import graphs.paths.GraphPath;
+import graphs.paths.C1PPath;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,18 +14,22 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import testing.TestResult;
 
-public class C1TestResult extends TestResult {
+public class C1PTestResult extends TestResult {
 
-	public C1TestResult(List<GraphPath> paths) {
-		super(paths);
+//	private String filterMode;
+	private List<C1PPath> paths;
+
+	public C1PTestResult(List<C1PPath> paths) {
+		super(Collections.emptyList());
+		this.paths = paths;
 	}
 
 	@Override
 	public void display() {
-		FXMLLoader fxmlLoader = new FXMLLoader(C1TestResult.class.getResource("path_result.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(C1PTestResult.class.getResource("c1p_result.fxml"));
 		try {
 			Parent parent = fxmlLoader.load();
-			PathResultController controller = fxmlLoader.getController();
+			C1PResultController controller = fxmlLoader.getController();
 			controller.setResults(paths);
 
 			Scene scene = new Scene(parent, 600, 400);
@@ -38,7 +43,7 @@ public class C1TestResult extends TestResult {
 			primaryStage.getIcons().add(image);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
-			primaryStage.setTitle("C1 Testing Results");
+			primaryStage.setTitle("C1P Testing Results");
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

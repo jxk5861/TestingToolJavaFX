@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="testing.results.PathResultController">
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <TextArea fx:id="testResults" editable="false" focusTraversable="false" layoutX="14.0" layoutY="35.0" prefHeight="353.0" prefWidth="569.0" style="-fx-border-color: #c870ff; -fx-border-width: .5;" />
+            <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="106.0" text="Testing Results" />
+         </children>
+      </Pane>
+   </children>
+</VBox>
