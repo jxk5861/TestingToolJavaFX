@@ -13,14 +13,14 @@ import graphs.Vertex;
 import graphs.paths.GraphPath;
 import testing.Test;
 import testing.TestResult;
-import testing.dynamiclinkage.EnvironmentIF;
+import testing.dynamiclinkage.TestingEnvironmentIF;
 import testing.results.C1TestResult;
 
 public class C1 extends Test {
 
 	private Vertex start;
 
-	public C1(EnvironmentIF environment) {
+	public C1(TestingEnvironmentIF environment) {
 		super(environment);
 	}
 

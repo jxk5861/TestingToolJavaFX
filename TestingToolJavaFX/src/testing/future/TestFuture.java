@@ -46,7 +46,7 @@ public class TestFuture {
 			try {
 				TAF.test();
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 		}
 	}

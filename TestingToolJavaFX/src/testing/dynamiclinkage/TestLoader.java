@@ -4,7 +4,7 @@ import testing.Test;
 
 public abstract class TestLoader extends Test {
 
-    public TestLoader(EnvironmentIF environment){
+    public TestLoader(TestingEnvironmentIF environment){
         super(environment);
     }
 }

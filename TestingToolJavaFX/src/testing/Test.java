@@ -1,12 +1,12 @@
 package testing;
 
-import testing.dynamiclinkage.EnvironmentIF;
+import testing.dynamiclinkage.TestingEnvironmentIF;
 
 public abstract class Test implements TestIF {
-	protected EnvironmentIF environment;
+	protected TestingEnvironmentIF environment;
 	protected boolean canceled;
 
-	public Test(EnvironmentIF environment) {
+	public Test(TestingEnvironmentIF environment) {
 		this.environment = environment;
 		this.canceled = false;
 	}

@@ -11,7 +11,7 @@ import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
 import testing.TestResult;
-import testing.dynamiclinkage.EnvironmentIF;
+import testing.dynamiclinkage.TestingEnvironmentIF;
 import testing.dynamiclinkage.TestLoader;
 import testing.results.DUTestResult;
 
@@ -20,7 +20,7 @@ public class DU extends TestLoader {
 	private List<Vertex> declares;
 	private List<Vertex> uses;
 	
-	public DU(EnvironmentIF environment) {
+	public DU(TestingEnvironmentIF environment) {
 		super(environment);
 		
 		declares = new ArrayList<>();

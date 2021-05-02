@@ -2,6 +2,6 @@ package testing.dynamiclinkage;
 
 import graphs.GraphRenderer;
 
-public interface EnvironmentIF {
+public interface TestingEnvironmentIF {
 	GraphRenderer getGraphRenderer();
 }

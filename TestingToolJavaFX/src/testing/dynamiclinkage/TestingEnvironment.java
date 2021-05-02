@@ -2,10 +2,10 @@ package testing.dynamiclinkage;
 
 import graphs.GraphRenderer;
 
-public class Environment implements EnvironmentIF {
+public class TestingEnvironment implements TestingEnvironmentIF {
 	private GraphRenderer graphRenderer;
 
-	public Environment(GraphRenderer graphRenderer) {
+	public TestingEnvironment(GraphRenderer graphRenderer) {
 		this.graphRenderer = graphRenderer;
 	}
 

@@ -23,8 +23,8 @@ import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import testing.TestIF;
 import testing.TestResult;
-import testing.dynamiclinkage.Environment;
-import testing.dynamiclinkage.EnvironmentIF;
+import testing.dynamiclinkage.TestingEnvironment;
+import testing.dynamiclinkage.TestingEnvironmentIF;
 import testing.dynamiclinkage.Utility;
 import testing.future.TestFuture;
 import testing.tests.C1;
@@ -45,7 +45,7 @@ public class PrimaryController {
 	public PrimaryController() {
 		futures = new HashMap<>();
 		results = new HashMap<>();
-		
+
 		this.checkIcon = new Image("check.png");
 		this.xIcon = new Image("x.png");
 	}
@@ -62,7 +62,7 @@ public class PrimaryController {
 		testMenu.getItems().add(load);
 
 		// Add two default tests.
-		Environment environment = new Environment(state.getGraphRenderer());
+		TestingEnvironment environment = new TestingEnvironment(state.getGraphRenderer());
 		this.addTest(new C1(environment));
 		this.addTest(new C1P(environment));
 
@@ -155,9 +155,9 @@ public class PrimaryController {
 		// Find the correct constructor (the one with environment as a parameter)
 		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
 			if (constructor.getParameterTypes().length == 1) {
-				if (EnvironmentIF.class == constructor.getParameterTypes()[0]) {
+				if (TestingEnvironmentIF.class == constructor.getParameterTypes()[0]) {
 					// Create the program environment from the graph renderer.
-					Environment environment = new Environment(state.getGraphRenderer());
+					TestingEnvironment environment = new TestingEnvironment(state.getGraphRenderer());
 					try {
 						Object o = constructor.newInstance(environment);
 						if (o instanceof TestIF) {
