@@ -1,6 +1,8 @@
 # TestingToolJavaFX
 A structural testing tool that provides the user with the ability to draw a program graph and run various structural testing algorithms on it. 
-Implemented algorithms include c1, c1p, and DU-paths testing.
+Implemented algorithms include C1, C1P, and DU-paths testing.
+
+This was our submission for our SWENG-421 final project.
 
 #Tool Images
 ## Drawing a graph
