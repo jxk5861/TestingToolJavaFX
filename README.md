@@ -4,7 +4,7 @@ Implemented algorithms include C1, C1P, and DU-paths testing.
 
 This was our submission for our SWENG-421 final project with a focus on implementing the design patterns learned in class. Details on design patterns below the images.
 
-#Tool Images
+# Tool Images
 ## Drawing a graph
 ![image](https://user-images.githubusercontent.com/58671117/123255173-85956500-d4bd-11eb-8cba-ff2e4a3dac73.png)
 ## Running a test
