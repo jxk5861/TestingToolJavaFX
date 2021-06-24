@@ -1,3 +1,7 @@
+# Team Members
+Jacob Karabin (jxk5861@psu.edu)
+Mohammad Alhmoudi
+
 # TestingToolJavaFX
 A structural testing tool that provides the user with the ability to draw a program graph and run various structural testing algorithms on it. 
 Implemented algorithms include C1, C1P, and DU-paths testing.
