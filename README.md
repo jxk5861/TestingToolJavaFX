@@ -6,7 +6,7 @@
 A structural testing tool that provides the user with the ability to draw a program graph and run various structural testing algorithms on it. 
 Implemented algorithms include C1, C1P, and DU-paths testing.
 
-This was our submission for our SWENG-421 final project with a focus on implementing the design patterns learned in class. Details on design patterns below the images.
+This was our submission for our SWENG-421 final project with a focus on implementing the design patterns learned in class. Details on design patterns are below the images.
 
 # Tool Images
 ## Drawing a graph
