@@ -20,24 +20,38 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>15</release>
+					<release>17</release>
 					<compilerArgs>
-						<arg>--enable-preview</arg>
+						<arg></arg>
 					</compilerArgs>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>gui.Main</mainClass>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.openjfx</groupId>
+			<artifactId>javafx</artifactId>
+			<version>17.0.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>13</version>
+			<version>17.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>13</version>
+			<version>17.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfxtras</groupId>
