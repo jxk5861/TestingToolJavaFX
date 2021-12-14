@@ -2,8 +2,8 @@ package testing.results;
 
 import java.util.Collections;
 
-import javax.swing.JOptionPane;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import testing.TestResult;
 
 /**
@@ -26,7 +26,10 @@ public class NullResult extends TestResult {
 
 	@Override
 	public void display() {
-		JOptionPane.showMessageDialog(null, this.message);
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("C1 Test Result");
+		alert.setHeaderText(this.message);
+		alert.showAndWait();
 	}
 
 }

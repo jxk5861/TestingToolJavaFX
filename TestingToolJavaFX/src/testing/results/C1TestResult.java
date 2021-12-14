@@ -21,7 +21,8 @@ public class C1TestResult extends TestResult {
 
 	@Override
 	public void display() {
-		FXMLLoader fxmlLoader = new FXMLLoader(C1TestResult.class.getResource("path_result.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(
+				C1TestResult.class.getResource("path_result.fxml"));
 		try {
 			Parent parent = fxmlLoader.load();
 			PathResultController controller = fxmlLoader.getController();

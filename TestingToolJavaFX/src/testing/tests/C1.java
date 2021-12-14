@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
-
-import javax.swing.JOptionPane;
 
 import graphs.GraphRenderer;
 import graphs.Vertex;
 import graphs.paths.GraphPath;
+import javafx.scene.control.TextInputDialog;
 import testing.Test;
 import testing.TestResult;
 import testing.dynamiclinkage.TestingEnvironmentIF;
@@ -41,8 +41,17 @@ public class C1 extends Test {
 	public void init() {
 		GraphRenderer clone = environment.getGraphRenderer().clone();
 
-		String id = JOptionPane.showInputDialog("Input the start vertex");
-		start = clone.getVertexById(id);
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("C1 Test");
+		dialog.setHeaderText("Enter the start vertex:");
+		dialog.setContentText("Start Vertex:");
+		Optional<String> id = dialog.showAndWait();
+		
+		if (id.isEmpty()) {
+			start = null;
+			return;
+		}
+		start = clone.getVertexById(id.get());
 	}
 
 	private static class Edge {
@@ -76,8 +85,8 @@ public class C1 extends Test {
 	}
 
 	/**
-	 * Conduct c1 testing (find DD-paths) on the given source vertex. Uses the DFS
-	 * approach (generates different test cases from BFS).
+	 * Conduct c1 testing (find DD-paths) on the given source vertex. Uses the
+	 * DFS approach (generates different test cases from BFS).
 	 */
 	private List<GraphPath> c1(Vertex in) {
 		HashSet<Edge> visited = new HashSet<>();
@@ -91,7 +100,8 @@ public class C1 extends Test {
 		return paths;
 	}
 
-	private void c1Helper(GraphPath path, Set<Edge> visited, List<GraphPath> paths) {
+	private void c1Helper(GraphPath path, Set<Edge> visited,
+			List<GraphPath> paths) {
 		if (this.isCanceled()) {
 			return;
 		}
