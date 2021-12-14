@@ -15,9 +15,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-//			BorderPane root = new BorderPane();
-//			Scene scene = new Scene(root,400,400);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			// BorderPane root = new BorderPane();
+			// Scene scene = new Scene(root,400,400);
+			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Parent parent = loadFXML("primary");
 			Scene scene = new Scene(parent, 1200, 900);
 
@@ -30,15 +30,16 @@ public class Main extends Application {
 			primaryStage.setTitle("Testing Tool");
 			primaryStage.show();
 
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
+			// primaryStage.setScene(scene);
+			// primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(
+				Main.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();
 	}
 
